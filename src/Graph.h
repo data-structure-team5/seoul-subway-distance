@@ -20,8 +20,12 @@ struct Vertex {
 
 class Graph {
 public:
+    Graph() = default;
+    // Edges are owned by this graph; copying their pointers is unsafe.
+    Graph(const Graph&) = delete;
+    Graph& operator=(const Graph&) = delete;
     ~Graph();
-    // 두 CSV를 읽어 그래프를 만든다. 실패하면 false
+    // 두 CSV를 읽어 그래프를 만든다. 실패하면 false, 기존 그래프 유지
     bool load(const std::string& stationCsv, const std::string& transferCsv);
     int size() const;                   // 정점 개수 V
     const Vertex& vertex(int v) const;  // 정점 v의 정보
@@ -29,6 +33,8 @@ public:
 
 private:
     std::vector<Vertex> vertices_;
+    bool buildFromCsv(const std::string& stationCsv, const std::string& transferCsv);
+    int findVertex(const std::string& name, int line) const;
     int addVertex(const std::string& name, int line);
     void addEdge(int from, int to, int cost, bool transfer);
 };
