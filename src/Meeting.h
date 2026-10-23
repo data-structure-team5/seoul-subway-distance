@@ -14,6 +14,8 @@ struct Candidate {
 
 // dist[p][v]: p번 사람이 정점 v까지 가는 최소 시간
 // maxTime이 짧은 순, 같으면 sumTime이 짧은 순으로 병합 정렬해 상위 topK개 반환
+// 한 명이라도 못 가는(INF) 역은 빠지고, 후보가 topK보다 적으면 있는 만큼만 반환
+// dist가 비었거나 dist[p]의 길이가 g.size()와 다르면 빈 목록 반환
 std::vector<Candidate> rankMeetingPlaces(const Graph& g,
                                          const std::vector<std::vector<int>>& dist,
                                          int topK = 5);

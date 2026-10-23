@@ -43,6 +43,10 @@ std::vector<Candidate> rankMeetingPlaces(const Graph& g,
                                          const std::vector<std::vector<int>>& dist,
                                          int topK) {
     if (dist.empty() || topK <= 0) return {};
+    // 정점 수와 길이가 다른 dist가 섞이면 범위 밖을 읽게 되므로 막는다.
+    for (const std::vector<int>& d : dist) {
+        if (static_cast<int>(d.size()) != g.size()) return {};
+    }
 
     // 1. 역 이름별로 정점 묶기 (같은 이름의 호선 정점들이 한 노드에 모인다)
     StationBST bst;
