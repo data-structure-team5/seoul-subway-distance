@@ -48,4 +48,4 @@ int main() {
 - `std::vector`의 전체 대체품은 아닙니다. `pop_back()`, `resize()`, `at()`, 중간 삽입·삭제 등은 현재 구현되어 있지 않습니다.
 - 이 헤더는 `<vector>`를 사용하지 않습니다. `<memory>`의 `std::allocator`로 저장 공간을 관리하며, `<cstddef>`, `<stdexcept>`, `<utility>`도 사용합니다. 과제에서 허용하는 표준 헤더의 범위는 별도로 확인이 필요합니다.
 
-**통합 상태:** 현재 `Meeting.cpp`는 검색 결과를 `std::vector<int>`로 받고 있어 `DynamicArray<int>`와 형식이 맞지 않습니다. `Meeting.cpp`는 수정하지 않았으며, 팀원과 반환·사용 형식을 맞추기 전까지 전체 프로젝트 컴파일이 되지 않습니다. 다른 모듈에도 `<vector>` 사용이 남아 있습니다.
+**통합 상태:** `Meeting`은 `DynamicArray`로 바꿨으며, `dist`를 `DynamicArray<DynamicArray<int>>`로 받습니다. `Graph`, `MinHeap`, `Dijkstra`, `PathPrinter`, `main`에는 아직 `<vector>` 사용이 남아 있습니다.
