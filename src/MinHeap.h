@@ -1,5 +1,5 @@
 #pragma once
-#include <vector>
+#include "DynamicArray_vertor.h"
 
 // ② 담당: 할리오나 — 최소 힙
 
@@ -16,7 +16,8 @@ public:
     int size() const;
 
 private:
-    std::vector<HeapItem> a_;
+    DynamicArray<HeapItem> a_;  // 앞의 n_칸만 힙으로 쓴다
+    int n_ = 0;                 // 힙에 들어 있는 개수
     void siftUp(int i);
     void siftDown(int i);
 };
