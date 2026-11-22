@@ -5,17 +5,14 @@
 #include "Queue.h"
 #include "Stack.h"
 
-namespace {
-// 초 -> "18분 30초" (0초면 "18분")
 std::string formatTime(int seconds) {
     std::string s = std::to_string(seconds / 60) + "분";
     if (seconds % 60 != 0) s += " " + std::to_string(seconds % 60) + "초";
     return s;
 }
-}  // namespace
 
-void printPath(const Graph& g, const std::vector<int>& dist,
-               const std::vector<int>& prev, int target) {
+void printPath(const Graph& g, const DynamicArray<int>& dist,
+               const DynamicArray<int>& prev, int target) {
     int n = g.size();
     if (target < 0 || target >= n || static_cast<int>(dist.size()) != n ||
         static_cast<int>(prev.size()) != n) {
