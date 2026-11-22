@@ -16,16 +16,18 @@
 
 C++17 컴파일러(g++ 등)가 필요합니다. 저장소 최상위 폴더에서 실행하세요. 프로그램이 `data/` 폴더를 상대 경로로 읽습니다.
 
-```bash
-g++ -std=c++17 -O2 -static src/*.cpp -o subway
-```
+| OS | 빌드 명령 |
+|---|---|
+| Windows (MinGW g++) | `g++ -std=c++17 -O2 -static src/*.cpp -o subway` |
+| macOS | `g++ -std=c++17 -O2 src/*.cpp -liconv -o subway` |
+| Linux | `g++ -std=c++17 -O2 src/*.cpp -o subway` |
 
 ```bash
 ./subway
 ```
 
-- `-static`: Windows에서 Git Bash 등 다른 MinGW 환경의 `libstdc++-6.dll`이 먼저 잡히면, 실행 중 오류가 나거나 데이터 로드에 실패할 수 있습니다. `-static`으로 빌드하면 표준 라이브러리가 실행 파일에 포함되어 이 문제를 피할 수 있습니다.
-- CSV 인코딩(CP949) 변환에 Windows API를 사용하므로, 현재는 Windows에서만 빌드됩니다.
+- CSV(CP949)를 UTF-8로 바꿀 때 Windows에서는 Windows API를, macOS·Linux에서는 `iconv`를 사용합니다. macOS는 `iconv`가 별도 라이브러리라 `-liconv`를 붙여야 합니다.
+- `-static`(Windows): Git Bash 등 다른 MinGW 환경의 `libstdc++-6.dll`이 먼저 잡히면, 실행 중 오류가 나거나 데이터 로드에 실패할 수 있습니다. `-static`으로 빌드하면 표준 라이브러리가 실행 파일에 포함되어 이 문제를 피할 수 있습니다. macOS는 `-static`을 지원하지 않으므로 빼고 빌드합니다.
 
 ### 실행 예시
 

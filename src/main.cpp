@@ -1,5 +1,5 @@
 // 서울 지하철 약속장소 추천 및 경로 안내 프로그램
-// 빌드: g++ -std=c++17 -O2 -static src/*.cpp -o subway
+// 빌드: g++ -std=c++17 -O2 -static src/*.cpp -o subway   (macOS: -static 대신 -liconv, README 참고)
 // 실행: ./subway   (data 폴더가 있는 위치에서)
 
 #include <iostream>
