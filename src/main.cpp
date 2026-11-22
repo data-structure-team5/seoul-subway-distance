@@ -4,7 +4,6 @@
 
 #include <iostream>
 #include <string>
-#include <vector>
 #include "Graph.h"
 #include "StationBST.h"
 #include "Dijkstra.h"
@@ -66,20 +65,6 @@ int toNumber(const std::string& text) {
         x = x * 10 + (c - '0');
     }
     return x;
-}
-
-// 다익스트라(Dijkstra.h)는 std::vector로 주고받고, 나머지 모듈은 DynamicArray를 쓴다.
-// 형식이 다른 곳만 여기서 옮겨 담는다. Dijkstra.h가 DynamicArray로 바뀌면 지운다.
-std::vector<int> toVector(const DynamicArray<int>& a) {
-    std::vector<int> v;
-    for (int x : a) v.push_back(x);
-    return v;
-}
-
-DynamicArray<int> toDynamicArray(const std::vector<int>& v) {
-    DynamicArray<int> a;
-    for (int x : v) a.push_back(x);
-    return a;
 }
 
 // 역 이름 -> 그 역의 모든 호선 정점. "강남역"처럼 끝에 "역"을 붙여도 찾는다.
@@ -145,10 +130,10 @@ int main() {
     // 4. 사람마다 다익스트라 (할리오나)
     DynamicArray<DynamicArray<int>> dists, prevs;
     for (int p = 0; p < k; p++) {
-        std::vector<int> dist, prev;
-        dijkstra(g, toVector(*starts[p]), dist, prev);
-        dists.push_back(toDynamicArray(dist));
-        prevs.push_back(toDynamicArray(prev));
+        DynamicArray<int> dist, prev;
+        dijkstra(g, *starts[p], dist, prev);
+        dists.push_back(dist);
+        prevs.push_back(prev);
     }
 
     // 5. 사람마다 도착할 정점 정하기
