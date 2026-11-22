@@ -48,4 +48,4 @@ int main() {
 - `std::vector`의 전체 대체품은 아닙니다. `pop_back()`, `resize()`, `at()`, 중간 삽입·삭제 등은 현재 구현되어 있지 않습니다.
 - 이 헤더는 `<vector>`를 사용하지 않습니다. `<memory>`의 `std::allocator`로 저장 공간을 관리하며, `<cstddef>`, `<stdexcept>`, `<utility>`도 사용합니다. 과제에서 허용하는 표준 헤더의 범위는 별도로 확인이 필요합니다.
 
-**통합 상태:** `Meeting`은 `DynamicArray`로 바꿨으며, `dist`를 `DynamicArray<DynamicArray<int>>`로 받습니다. `Graph`도 정점 저장과 CSV 처리에 `DynamicArray`를 사용합니다. `MinHeap`, `Dijkstra`, `PathPrinter`, `main`에는 아직 `<vector>` 사용이 남아 있습니다.
+**통합 상태:** `Meeting`은 `DynamicArray`로 바꿨으며, `dist`를 `DynamicArray<DynamicArray<int>>`로 받습니다. `Graph`도 정점 저장과 CSV 처리에 `DynamicArray`를 사용합니다. `MinHeap`, `Dijkstra`, `PathPrinter`, `main`도 모두 `DynamicArray`로 바꿔, 현재 `src/`에는 `<vector>`를 사용하는 코드가 없습니다.

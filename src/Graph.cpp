@@ -3,12 +3,17 @@
 #include <limits>
 #include <sstream>
 #include <utility>
+#ifdef _WIN32
 #ifndef NOMINMAX
 #define NOMINMAX
 #endif
 #include <windows.h>
+#else
+#include <iconv.h>
+#endif
 
 namespace {
+#ifdef _WIN32
 // Convert one CP949-encoded CSV line to UTF-8 on Windows.
 bool cp949_To_Utf8(const std::string& input, std::string& output) {
     output.clear();
@@ -42,6 +47,30 @@ bool cp949_To_Utf8(const std::string& input, std::string& output) {
     }
     return true;
 }
+#else
+// Convert one CP949-encoded CSV line to UTF-8 on macOS/Linux using iconv.
+bool cp949_To_Utf8(const std::string& input, std::string& output) {
+    output.clear();
+    if (input.empty()) return true;
+
+    iconv_t cd = iconv_open("UTF-8", "CP949");
+    if (cd == reinterpret_cast<iconv_t>(-1)) return false;
+
+    // A CP949 character (1-2 bytes) becomes at most 3 UTF-8 bytes.
+    std::string buffer(input.size() * 3 / 2 + 4, '\0');
+    char* in = const_cast<char*>(input.data());
+    std::size_t inLeft = input.size();
+    char* out = &buffer[0];
+    std::size_t outLeft = buffer.size();
+
+    std::size_t result = iconv(cd, &in, &inLeft, &out, &outLeft);
+    iconv_close(cd);
+    if (result == static_cast<std::size_t>(-1) || inLeft != 0) return false;
+
+    output.assign(buffer.data(), buffer.size() - outLeft);
+    return true;
+}
+#endif
 
 // Remove surrounding ASCII whitespace without changing the station name.
 std::string trim(const std::string& text) {
