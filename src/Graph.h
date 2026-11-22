@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include <vector>
+#include "DynamicArray_vertor.h"
 
 // ① 담당: 칸 — CSV 읽기 + 노선도 그래프(인접 리스트)
 // 시간 단위는 모두 초(정수)로 통일한다. 예) "02:30" -> 150
@@ -32,7 +32,7 @@ public:
     Edge* edges(int v) const;           // 정점 v의 첫 간선 (없으면 nullptr)
 
 private:
-    std::vector<Vertex> vertices_;
+    DynamicArray<Vertex> vertices_;
     bool buildFromCsv(const std::string& stationCsv, const std::string& transferCsv);
     int findVertex(const std::string& name, int line) const;
     int addVertex(const std::string& name, int line);

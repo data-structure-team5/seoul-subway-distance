@@ -2,6 +2,7 @@
 #include <fstream>
 #include <limits>
 #include <sstream>
+#include <utility>
 #ifndef NOMINMAX
 #define NOMINMAX
 #endif
@@ -64,7 +65,7 @@ std::string normalizeStationName(const std::string& text) {
 
 // Split one CSV record, including quoted fields and escaped quotes.
 // Invalid quoting returns false; columns should only be used on success.
-bool splitCsvLine(const std::string& line, std::vector<std::string>& columns) {
+bool splitCsvLine(const std::string& line, DynamicArray<std::string>& columns) {
     columns.clear();
     std::string field;
     bool inQuotes = false;
@@ -105,7 +106,7 @@ bool splitCsvLine(const std::string& line, std::vector<std::string>& columns) {
 
 // Read six-column CP949 CSV data, skipping the header and empty lines.
 bool readCsvFile(const std::string& path,
-                 std::vector<std::vector<std::string>>& rows) {
+                 DynamicArray<DynamicArray<std::string>>& rows) {
     rows.clear();
     std::ifstream file(path, std::ios::binary);
     if (!file.is_open()) return false;
@@ -115,7 +116,7 @@ bool readCsvFile(const std::string& path,
     if (!rawLine.empty() && rawLine.back() == '\r') rawLine.pop_back();
 
     std::string utf8Line;
-    std::vector<std::string> columns;
+    DynamicArray<std::string> columns;
     if (!cp949_To_Utf8(rawLine, utf8Line) ||
         !splitCsvLine(utf8Line, columns) || columns.size() != 6) {
         return false;
@@ -180,21 +181,21 @@ bool Graph::load(const std::string& stationCsv, const std::string& transferCsv) 
     if (!temporary.buildFromCsv(stationCsv, transferCsv)) {
         return false;
     }
-    vertices_.swap(temporary.vertices_);
+    std::swap(vertices_, temporary.vertices_);
     return true;
 }
 
 bool Graph::buildFromCsv(const std::string& stationCsv, const std::string& transferCsv) {
-    std::vector<std::vector<std::string>> stationRows;
-    std::vector<std::vector<std::string>> transferRows;
+    DynamicArray<DynamicArray<std::string>> stationRows;
+    DynamicArray<DynamicArray<std::string>> transferRows;
     if (!readCsvFile(stationCsv, stationRows) ||
         !readCsvFile(transferCsv, transferRows)) {
         return false;
     }
 
-    std::vector<int> stationIds;
-    std::vector<int> travelTimes;
-    for (const std::vector<std::string>& row : stationRows) {
+    DynamicArray<int> stationIds;
+    DynamicArray<int> travelTimes;
+    for (const DynamicArray<std::string>& row : stationRows) {
         std::string lineText = trim(row[1]);
         if (lineText.size() != 1 || lineText[0] < '1' || lineText[0] > '8') {
             return false;
@@ -245,7 +246,7 @@ bool Graph::buildFromCsv(const std::string& stationCsv, const std::string& trans
         addEdge(to, from, cost, false);
     }
 
-    for (const std::vector<std::string>& row : transferRows) {
+    for (const DynamicArray<std::string>& row : transferRows) {
         std::string sourceText = trim(row[1]);
         if (sourceText.size() != 1 || sourceText[0] < '1' || sourceText[0] > '8') {
             return false;
