@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "DynamicArray_vertor.h"
+#include "DynamicArray_vector.h"
 
 // ③ 담당: 성원 — 역 이름 검색(AVL 트리)
 // 키: 역 이름, 값: 그 역의 모든 호선 정점 번호

@@ -1,5 +1,5 @@
 #pragma once
-#include "DynamicArray_vertor.h"
+#include "DynamicArray_vector.h"
 
 // ② 담당: 할리오나 — 최소 힙
 

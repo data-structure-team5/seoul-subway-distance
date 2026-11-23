@@ -1,11 +1,11 @@
 # DynamicArray 사용 안내
 
-`src/DynamicArray_vertor.h`는 `<vector>`를 사용하지 않고 구현한 공통 동적 배열입니다. 원소를 연속된 공간에 저장하고, 공간이 부족하면 더 큰 공간을 확보해 기존 원소를 복사합니다. 여러 자료형에 사용할 수 있도록 `DynamicArray<T>` 템플릿으로 작성했습니다. 현재 코드는 **C++17**을 기준으로 합니다.
+`src/DynamicArray_vector.h`는 `<vector>`를 사용하지 않고 구현한 공통 동적 배열입니다. 원소를 연속된 공간에 저장하고, 공간이 부족하면 더 큰 공간을 확보해 기존 원소를 복사합니다. 여러 자료형에 사용할 수 있도록 `DynamicArray<T>` 템플릿으로 작성했습니다. 현재 코드는 **C++17**을 기준으로 합니다.
 
 ## 사용 예시
 
 ```cpp
-#include "DynamicArray_vertor.h"
+#include "DynamicArray_vector.h"
 #include <iostream>
 
 int main() {

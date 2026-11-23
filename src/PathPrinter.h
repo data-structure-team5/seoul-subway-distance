@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "DynamicArray_vertor.h"
+#include "DynamicArray_vector.h"
 #include "Graph.h"
 
 // ④ 담당: 성규 — 경로 출력(스택), 연결 검사(큐, BFS)

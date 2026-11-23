@@ -1,6 +1,6 @@
 #pragma once
 #include <stdexcept>
-#include "DynamicArray_vertor.h"
+#include "DynamicArray_vector.h"
 
 // ④ 담당: 성규 — 큐 (원형 배열 기반)
 // 연결 검사(BFS): 먼저 찾은 정점부터 차례로 꺼내 이웃을 살핀다. (선입선출)

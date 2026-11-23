@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "DynamicArray_vertor.h"
+#include "DynamicArray_vector.h"
 
 // ① 담당: 칸 — CSV 읽기 + 노선도 그래프(인접 리스트)
 // 시간 단위는 모두 초(정수)로 통일한다. 예) "02:30" -> 150

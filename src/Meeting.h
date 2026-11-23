@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "DynamicArray_vertor.h"
+#include "DynamicArray_vector.h"
 #include "Graph.h"
 
 // ⑤ 담당: 원용 — 약속장소 순위(병합 정렬)

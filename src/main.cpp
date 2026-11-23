@@ -69,6 +69,7 @@ int toNumber(const std::string& text) {
 
 // 역 이름 -> 그 역의 모든 호선 정점. "강남역"처럼 끝에 "역"을 붙여도 찾는다.
 const StationBST::VertexList* findStation(const StationBST& bst, const std::string& name) {
+    if (name == "총신대입구" || name == "총신대입구역") return bst.find("이수");
     const StationBST::VertexList* found = bst.find(name);
     const std::string suffix = "역";
     if (found == nullptr && name.size() > suffix.size() &&

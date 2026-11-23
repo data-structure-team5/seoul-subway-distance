@@ -1,6 +1,6 @@
 #pragma once
 #include <stdexcept>
-#include "DynamicArray_vertor.h"
+#include "DynamicArray_vector.h"
 
 // ④ 담당: 성규 — 스택 (배열 기반)
 // 경로 출력: 도착역부터 거꾸로 넣고, 꺼내면 출발역부터 나온다. (후입선출)

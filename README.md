@@ -122,7 +122,7 @@ data/
   transfer.csv           환승역 거리 및 소요시간
 src/
   main.cpp               전체 흐름 (입력 → 계산 → 출력)
-  DynamicArray_vertor.h  공통 동적 배열 (<vector> 대신 사용)
+  DynamicArray_vector.h  공통 동적 배열 (<vector> 대신 사용)
   Graph.h/.cpp           CSV 읽기, 인접 리스트 그래프
   MinHeap.h/.cpp         최소 힙
   Dijkstra.h/.cpp        다익스트라
