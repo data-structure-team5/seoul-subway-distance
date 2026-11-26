@@ -8,6 +8,9 @@
 #define NOMINMAX
 #endif
 #include <windows.h>
+#ifndef WC_ERR_INVALID_CHARS
+#define WC_ERR_INVALID_CHARS 0x00000080
+#endif
 #else
 #include <iconv.h>
 #endif
@@ -29,7 +32,7 @@ bool cp949_To_Utf8(const std::string& input, std::string& output) {
 
     std::wstring wide(wideLength, L'\0');
     if (MultiByteToWideChar(949, MB_ERR_INVALID_CHARS, input.data(),
-                            inputLength, wide.data(), wideLength) == 0) {
+                            inputLength, &wide[0], wideLength) == 0) {
         return false;
     }
 
@@ -40,7 +43,7 @@ bool cp949_To_Utf8(const std::string& input, std::string& output) {
 
     output.resize(utf8Length);
     if (WideCharToMultiByte(CP_UTF8, WC_ERR_INVALID_CHARS, wide.data(),
-                            wideLength, output.data(), utf8Length,
+                            wideLength, &output[0], utf8Length,
                             nullptr, nullptr) == 0) {
         output.clear();
         return false;
